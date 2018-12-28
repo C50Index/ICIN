@@ -21,8 +21,6 @@
 
 <script>
 
-
-
 var readyStateCheckInterval = setInterval(function() {
     if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
@@ -50,6 +48,7 @@ function init() {
     icinFilter = e.target.value;
     let filteredICINS = {...icins};
     if(icinFilter.length > 0) {
+      icinFilter = icinFilter.toUpperCase();
       filteredICINS = {};
       let tmp = Object.keys(icins).filter(s => s.indexOf(icinFilter) !== -1 || icins[s].indexOf(icinFilter) !== -1)
       tmp.map(symbol => filteredICINS[symbol] = icins[symbol]);
