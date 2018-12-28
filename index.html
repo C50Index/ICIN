@@ -1,0 +1,95 @@
+<html>
+<head>
+  <title>ICIN</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <script src="./icins.js"></script>
+  <script src="./markact.js"></script>
+</head>
+<body>
+  <div class='container'>
+  <h1><a id="International_Crypto_Identification_Number_ICIN_0"></a>International Crypto Identification Number (ICIN)</h1>
+<p>The ICIN is a way to uniquelly identify cryptocurrencies.</p>
+<p>With new cryptocurrencies popping up every day it is becoming more difficult to identify cryptocurrencies uniquely.  There needs to be a way to identify and categorize cryptocurriences.</p>
+<h2><a id="ICIN_Search_5"></a>ICIN Search</h2>
+<p>ICIN Search</p>
+<input type='text' placeholder="Enter a symbol" id='icinInput' />
+<div id='icinTable' style='overflow: scroll; height: 500px'>
+</div>
+
+<script>
+
+
+
+var readyStateCheckInterval = setInterval(function() {
+    if (document.readyState === "complete") {
+        clearInterval(readyStateCheckInterval);
+        init();
+    }
+}, 10);
+
+function renderICINTable(filteredICINS) {
+    renderAt(render(h('table', {class: 'table'}, 
+      h('th', {}, "Symbol"),
+      h('th', {}, "ICIN"),
+      h('tbody', {}, 
+        Object.keys(filteredICINS).map(k => h('tr', {}, 
+          h('td', {}, k),
+          h('td', {}, filteredICINS[k]),
+        ))
+      )
+    )), 'icinTable');
+}
+
+function init() {
+  let icinFilter = "";
+
+  document.getElementById('icinInput').addEventListener("input", (e) => {
+    icinFilter = e.target.value;
+    let filteredICINS = {...icins};
+    if(icinFilter.length > 0) {
+      filteredICINS = {};
+      let tmp = Object.keys(icins).filter(s => s.indexOf(icinFilter) !== -1 || icins[s].indexOf(icinFilter) !== -1)
+      tmp.map(symbol => filteredICINS[symbol] = icins[symbol]);
+    }
+    renderICINTable(filteredICINS);
+  })
+
+  renderICINTable(icins);
+}
+</script>
+
+<h2><a id="What_is_it_9"></a>What is it?</h2>
+<p>An 11 digit number to uniquely identify cryptocurrencies</p>
+<h2><a id="How_it_works_12"></a>How it works</h2>
+<img src='./icin-for-btc.png' width='500px'/>
+<p>1-6 - Cryptocurrency Symbol In Numbers<br>
+7 - X or something else<br>
+7-10 - Sequential Ordering of Cryptocurreny starting with 000<br>
+11 - Checksum using the Luhn Algorithm <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">https://en.wikipedia.org/wiki/Luhn_algorithm</a></p>
+<h2><a id="The_Code_19"></a>The Code</h2>
+<pre><code class="js">
+  function ICIN(symbol, duplicates=0) {
+      let result = "";
+      for(let i = 0 ; i < symbol.length  && i < 4; i++) {
+        result += symbol.charCodeAt(i);
+      }
+      result += duplicates;
+      for(let i = result.length; i < 10; i++) {
+        result+= (0);
+      }
+      // The check digit (x) is obtained by computing the sum of the non-check digits then computing 9 times that value modulo 10 (in equation form, ((67 × 9) mod 10)). In algorithm form: 
+      let sum = 0;
+      for(let i = 0; i < result.length; i++) {
+        sum += Number(result[i]);
+      }
+      let check = (9 * sum) % 10;
+      return result += check;
+    }
+</code></pre>
+</div>
+</body>
+</html>
+
