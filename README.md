@@ -5,13 +5,34 @@ With new cryptocurrencies popping up every day it is becoming more difficult to 
 
 
 ## What is it?
-An 11 digit number to uniquely identify cryptocurrencies
+An 13 digit number to uniquely identify cryptocurrencies
 
-## How it works
-1-6 - Cryptocurrency Symbol In Numbers
-7 - X or something else
-7-10 - Sequential Ordering of Cryptocurreny starting with 000
-11 - Checksum using the Luhn Algorithm https://en.wikipedia.org/wiki/Luhn_algorithm
+# How it works
+1-3 Sector
+4-8 Coin Symbol
+9 - Token Type 
+10 - Supply
+11 - Reserved for duplicates
+12 - Reserved for duplicates
+13 - Checksum digit
+
+### Sector
+The market sector determined by C50Index
+
+### Symbol
+The first four digits of a cryptocurrency
+
+### The Supply
+- 0 = undefined
+- 1 = 0 - 10 ^1 - 1
+- 2 = (10 ^1) - (10^2-1)
+- 3 = (10^2) - (10^2 -1)
+- A = (10^10) - (10^10 - 1)
+- Y = 10^25+
+- Z = Uncapped
+
+## Checksum Digit
+13 - Checksum using the Luhn Algorithm https://en.wikipedia.org/wiki/Luhn_algorithm
 
 
 ## The Code
