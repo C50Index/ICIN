@@ -8,13 +8,13 @@ With new cryptocurrencies popping up every day it is becoming more difficult to 
 An 13 digit number to uniquely identify cryptocurrencies
 
 # How it works
-1-3 Sector
-4-8 Coin Symbol
-9 - Token Type 
-10 - Supply
-11 - Reserved for duplicates
-12 - Reserved for duplicates
-13 - Checksum digit
+- 1-3 Sector
+- 4-8 Coin Symbol
+- 9 - Token Type 
+- 10 - Supply
+- 11 - Reserved for duplicates
+- 12 - Reserved for duplicates
+- 13 - Checksum digit
 
 ### Sector
 The market sector determined by C50Index
