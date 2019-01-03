@@ -39,6 +39,11 @@ The first four digits of a cryptocurrency
 ## Checksum Digit
 13 - Checksum using the Luhn Algorithm https://en.wikipedia.org/wiki/Luhn_algorithm
 
+This is calculated by
+```js
+icin.split("").reduce((total, num) => num.toString().charCodeAt(0) + total, 0) * 9 % 10 
+```
+
 
 ## The Code
 ```javascript
