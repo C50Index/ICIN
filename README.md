@@ -20,9 +20,9 @@ An 13 digit number to uniquely identify cryptocurrencies
 The market sector determined by C50Index
 
 ## Token Type
-0 - undefined
-1 - Cryptocurrency
-2 - Token
+- 0 - undefined
+- 1 - Cryptocurrency
+- 2 - Token
 
 ### Symbol
 The first four digits of a cryptocurrency
